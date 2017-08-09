@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<som:SalesOrderCapture xmlns:enum="http://tsf.ab.com/enumeration" xmlns:ev="http://esb.tsf.ab.com/enterprise/event" xmlns:whs="http://tsf.ab.com/warehousedatamanagement" xmlns:error="http://tsf.ab.com/error" xmlns:stk="http://tsf.ab.com/stockmanagement" xmlns:ptk="http://tsf.ab.com/processtracking" xmlns:plg="http://tsf.ab.com/productlogisticsmanagement" xmlns:orm="http://tsf.ab.com/orderroutingmanagement" xmlns:tns="http://esb.tsf.ab.com/enterprise/message" xmlns:bk="http://tsf.ab.com/businesskey" xmlns:cnb="http://tsf.ab.com/contactbook" xmlns:pom="http://tsf.ab.com/purchaseordermanagement" xmlns:som="http://tsf.ab.com/salesordermanagement" xmlns:wcm="http://tsf.ab.com/warehousecompositemessage" xmlns:ns15="http://interoperabilityframework.oneleo.ab.com/model" xmlns:ns16="interoperability.framework">
+	<som:acceptBohSubstitution>false</som:acceptBohSubstitution>
+	<som:acceptSubstitution>false</som:acceptSubstitution>
+	<som:addressOrderInfos>
+		<som:AddressOrderInfo>
+			<som:code>9321</som:code>
+			<som:type code="Delivery"/>
+		</som:AddressOrderInfo>
+	</som:addressOrderInfos>
+	<som:backorderable>false</som:backorderable>
+	<som:businessUnitEANCode/>
+	<som:captureStatus/>
+	<som:capturedCustomerCode/>
+	<som:capturedCustomerCodeType code="IDF"/>
+	<som:code/>
+	<som:customerBusinessKey>
+		<bk:accountCode>9000000001</bk:accountCode>
+	</som:customerBusinessKey>
+	<som:customerOrderNumber>28</som:customerOrderNumber>
+	<som:customerOrderReference/>
+	<som:departureTime>2016-07-11T09:00:00Z</som:departureTime>
+	<som:dispatchDate>2016-07-11Z</som:dispatchDate>
+	<som:doubleCheck>false</som:doubleCheck>
+	<som:errorCode/>
+	<som:errorDescription/>
+	<som:groupIndicator code="Customer Auto Grouped"/>
+	<som:iwtBusinessKey>
+		<bk:code/>
+		<bk:creationTime>2016-07-11Z</bk:creationTime>
+		<bk:sendingWarehouse>
+			<bk:code/>
+		</bk:sendingWarehouse>
+	</som:iwtBusinessKey>
+	<som:marketingReference/>
+	<som:messageSequenceNumber>999999</som:messageSequenceNumber>
+	<som:messageStandard code="CEN"/>
+	<som:messageVersion code="D93A"/>
+	<som:note>Note</som:note>
+	<som:noteLocation code="Print on Invoice"/>
+	<som:orderDate>2016-07-11T09:00:00Z</som:orderDate>
+	<som:orderResponseRequired>false</som:orderResponseRequired>
+	<som:orderSource code="Electronic"/>
+	<som:orderType code="Normal"/>
+	<som:originalOrderCode>333344</som:originalOrderCode>
+	<som:pickTaskNumber/>
+	<som:preferredDeliveryDate>2016-07-11Z</som:preferredDeliveryDate>
+	<som:preferredWarehouseCode>
+		<bk:code/>
+	</som:preferredWarehouseCode>
+	<som:receivingWarehouseBusinessKey>
+		<bk:code/>
+	</som:receivingWarehouseBusinessKey>
+	<som:salesOrderCaptureLines>
+		<som:SalesOrderCaptureLine>
+			<som:capturedCustomerCode/>
+			<som:capturedCustomerCodeType code="IDF"/>
+			<som:capturedProductCode/>
+			<som:capturedProductCodeType code="BP"/>
+			<som:changeOrder code="Change"/>
+			<som:customerBusinessKey>
+				<bk:accountCode/>
+			</som:customerBusinessKey>
+			<som:customerOrderLineNumb>11</som:customerOrderLineNumb>
+			<som:externalPrescriptionNumber>67</som:externalPrescriptionNumber>
+			<som:indicationBackOrder>false</som:indicationBackOrder>
+			<som:internalPrescriptionNumber>77</som:internalPrescriptionNumber>
+			<som:lineNumber>1</som:lineNumber>
+			<som:missingReason/>
+			<som:note>note5</som:note>
+			<som:noteLocation code="Print on Invoice"/>
+			<som:orderType code="Normal"/>
+			<som:orderedQuantity>10</som:orderedQuantity>
+			<som:originalLineNumber>2</som:originalLineNumber>
+			<som:partialDelivery>false</som:partialDelivery>
+			<som:productBusinessKey>
+				<bk:internalCode>000000000000000007</bk:internalCode>
+				<bk:nationalCode/>
+				<bk:secondaryNationalCode/>
+				<bk:code/>
+				<bk:codeType/>
+			</som:productBusinessKey>
+			<som:productCheck code="All in one Batch Number"/>
+			<som:productDescription/>
+			<som:requiredBatchNumber/>
+			<som:sourceLineNumber>2</som:sourceLineNumber>
+			<som:status code="Draft"/>
+			<som:substitutionIndication>false</som:substitutionIndication>
+		</som:SalesOrderCaptureLine>
+	</som:salesOrderCaptureLines>
+	<som:senderIdentification>840</som:senderIdentification>
+	<som:separateInvoice>false</som:separateInvoice>
+	<som:status code="Draft"/>
+	<som:tenderCode/>
+	<som:transactionIdentifier/>
+	<som:transmissionDate>2016-07-11Z</som:transmissionDate>
+	<som:typeOfPurchaseSystem code="C"/>
+	<som:urgentOrder>false</som:urgentOrder>
+	<som:voiceContactWanted>false</som:voiceContactWanted>
+</som:SalesOrderCapture>

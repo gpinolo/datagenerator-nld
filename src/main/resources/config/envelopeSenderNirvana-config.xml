@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"	
+	xmlns:context="http://www.springframework.org/schema/context" 	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	
+	
+	<bean id="envelopeSenderNirvanaPropertiesConfigurer"	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="properties" ref="envelopeSenderProperties" />
+	</bean>
+
+	<bean id="envelopeSenderProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:config/properties/envelopeSenderNirvana.properties</value>
+				<value>classpath:config/datasource.properties</value>
+			</list>
+		</property>
+	</bean>
+
+    <bean id="headerSenderProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="locations">
+            <list>
+                <value>classpath:config/properties/headerSender.properties</value>
+            </list>
+        </property>
+    </bean>
+	
+	
+	
+	<!-- 
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config/properties/envelopeSenderNirvana.properties</value>
+				<value>classpath:config/datasource.properties</value>
+			</list>
+		</property>
+	</bean>
+		
+	<bean id="envelopeSenderProperties"		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="environment_db">${environment.db}</prop>
+				<prop key="environment_staging">${environment.staging}</prop>
+				<prop key="interfaceType">${interfaceType}</prop>
+				<prop key="transactionID">${transactionID:}</prop>
+				<prop key="stagingTable">${${interfaceOperation}.stagingTable:}</prop>
+				<prop key="transactionIDListFilePath">${transactionIDListFilePath}</prop>
+				<prop key="inputFilePath">${inputFilePath}</prop>
+				<prop key="sqlFileName">${sqlFileName}</prop>
+				
+				<prop key="patternMessageID">${patternMessageID}</prop>
+				<prop key="startFromMessageID">${startFromMessageID}</prop>
+				<prop key="prefixMessageID">${prefixMessageID}</prop>
+				<prop key="interfaceOperation">${interfaceOperation}</prop>
+				<prop key="interfaceID">${${interfaceOperation}.interfaceID}</prop>
+				<prop key="countryID">${countryID}</prop>
+				<prop key="siteID">${siteID}</prop>
+				<prop key="storeID">${storeID}</prop>
+				
+				<prop key="initialContextFactory">${initialContextFactory}</prop>
+				<prop key="urlPkgPrefixes">${urlPkgPrefixes}</prop>
+				<prop key="providerUrl">${providerUrl}</prop>
+				<prop key="outboundQueue">${${interfaceOperation}.outboundQueue}</prop>
+				<prop key="inboundQueue">${${interfaceOperation}.inboundQueue}</prop>
+				<prop key="connectionFactory">${connectionFactory}</prop>
+			</props>
+		</property>
+	</bean> -->
+
+</beans>

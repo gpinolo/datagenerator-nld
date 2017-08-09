@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema elementFormDefault="qualified"
+	targetNamespace="http://tsf.ab.com/patientdatamanagement" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:pdm="http://tsf.ab.com/patientdatamanagement"
+	xmlns:enum="http://tsf.ab.com/enumeration"
+	version="2.0.0">
+	<xs:annotation>
+		<xs:documentation>
+		 
+        </xs:documentation>
+	</xs:annotation>
+	
+	<xs:import namespace="http://tsf.ab.com/enumeration" />
+
+
+	<xs:element name="Addresss" type="pdm:Addresss"/>
+    <xs:complexType name="Addresss">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Address" type="pdm:Address"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="Address" type="pdm:Address"/>
+    <xs:complexType name="Address">
+		<xs:all>
+			<xs:element  minOccurs="0" name="addressLine1" type="xs:string"/>
+			<xs:element  minOccurs="0" name="addressLine2" type="xs:string"/>
+			<xs:element  minOccurs="0" name="addressLine3" type="xs:string"/>
+			<xs:element  minOccurs="0" name="addressLine4" type="xs:string"/>
+			<xs:element  minOccurs="0" name="buildingName" type="xs:string"/>
+			<xs:element  minOccurs="0" name="code" type="xs:string"/>
+			<xs:element  minOccurs="0" name="country" type="xs:string"/>
+			<xs:element  minOccurs="0" name="countryIsoCode2" type="xs:string"/>
+			<xs:element  minOccurs="0" name="houseNumber" type="xs:string"/>
+			<xs:element  minOccurs="0" name="postCode" type="xs:string"/>
+			<xs:element  minOccurs="0" name="unitDescription" type="xs:string"/>
+			<xs:element  minOccurs="0" name="unitNumber" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+
+
+	<xs:element name="Patients" type="pdm:Patients"/>
+    <xs:complexType name="Patients">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Patient" type="pdm:Patient"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="Patient" type="pdm:Patient"/>
+    <xs:complexType name="Patient">
+		<xs:all>
+			<xs:element  minOccurs="0" name="addresss" type="pdm:Addresss"/>
+			<xs:element  minOccurs="0" name="code" type="xs:string"/>
+			<xs:element  minOccurs="0" name="dob" type="xs:date"/>
+			<xs:element  minOccurs="1" name="firstName" type="xs:string"/>
+			<!-- <xs:element  minOccurs="0" name="gender" type="enum:PatientGender"/> -->
+			<xs:element  minOccurs="0" name="height" type="xs:decimal"/>
+			<xs:element  minOccurs="0" name="middleName" type="xs:string"/>
+			<!-- <xs:element  minOccurs="0" name="status" type="enum:PatientStatus"/> -->
+			<xs:element  minOccurs="0" name="surname" type="xs:string"/>
+			<xs:element  minOccurs="0" name="title" type="xs:string"/>
+			<xs:element  minOccurs="0" name="testDateTime" type="xs:dateTime"/>
+			<xs:element  minOccurs="0" name="testDate" type="xs:date"/>
+			<xs:element  minOccurs="0" name="testTime" type="xs:time"/>
+			<xs:element  minOccurs="0" name="testCData" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+
+
+	<xs:element name="PatientSearchCriterias" type="pdm:PatientSearchCriterias"/>
+    <xs:complexType name="PatientSearchCriterias">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="PatientSearchCriteria" type="pdm:PatientSearchCriteria"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="PatientSearchCriteria" type="pdm:PatientSearchCriteria"/>
+    <xs:complexType name="PatientSearchCriteria">
+		<xs:all>
+			<xs:element  minOccurs="0" name="dob" type="xs:date"/>
+			<xs:element  minOccurs="0" name="firstName" type="xs:string"/>
+			<xs:element  minOccurs="0" name="surname" type="xs:string"/>
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:element name="MissingNameError" type="pdm:MissingNameError" />
+    <xs:complexType name="MissingNameError">
+        <xs:all>
+        </xs:all>
+    </xs:complexType>
+	
+	<xs:element name="PatientCustomHeader"  type="pdm:PatientCustomHeader"/>
+	<xs:complexType name="PatientCustomHeader">
+		<xs:annotation>
+			<xs:documentation>
+	  		</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+
+			<!--OneLeonardo Standard headers -->
+			<!--Source Context -->
+			<xs:element minOccurs="0" name="SourceApplicationName" type="xs:string" />
+			<xs:element minOccurs="0" name="SourceSystemID" type="xs:string" />
+			<xs:element minOccurs="0" name="OwnerID" type="xs:string" />
+			<xs:element minOccurs="0" name="SourceEntityType" type="xs:string" />
+			<xs:element minOccurs="0" name="CreationDateTime" type="xs:dateTime" />
+			<!--Source Context/ -->
+			
+			<!--Target Context -->
+			<xs:element minOccurs="0" name="TargetApplicationName" type="xs:string" />
+			<xs:element minOccurs="0" name="TargetSystemID" type="xs:string" />
+			<xs:element minOccurs="0" name="DeliveryDateTime"	type="xs:dateTime" />
+			<xs:element minOccurs="0" name="TargetEntityType" type="xs:string" />
+			<!--Target Context -->
+			
+			<!-- Message Context/ -->
+			<xs:element minOccurs="0" name="MessageID" type="xs:string" /> 
+			<xs:element minOccurs="0" name="MessageCorrelationID"	type="xs:string" />
+			<xs:element minOccurs="0" name="MessagePriority" type="xs:integer" />
+			<xs:element minOccurs="0" name="MessageTrackingID" type="xs:string" />
+			<xs:element minOccurs="0" name="MessageChannel" type="xs:string" />
+			<xs:element minOccurs="0" name="MessageCategory" type="xs:string" />
+			<!-- Message Context/ -->
+
+			<!-- Interface Context -->
+			<xs:element minOccurs="0" name="InterfaceVersion" type="xs:string" />
+			<xs:element minOccurs="0" name="InterfaceID" type="xs:string" />
+			<xs:element minOccurs="0" name="InterfaceName" type="xs:string" />
+			<!-- Interface Context/ -->
+
+			<!--Tenant Context -->
+			<xs:element minOccurs="0" name="CountryID" type="xs:string" />
+			<xs:element minOccurs="0" name="SiteID" type="xs:string" />
+			<xs:element minOccurs="0" name="StoreID" type="xs:string" />
+			<!--Tenant Context/ -->
+
+			<!--Security Context -->
+			<xs:element minOccurs="0" name="DateTime" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="LayerName" type="xs:string" />			
+			<!--Security Context/ -->
+
+			<!--Custom fields  -->
+			<xs:element  minOccurs="0" name="Trigger" type="xs:string"/>
+			<xs:element  minOccurs="0" name="Entity_Code" type="xs:string"/>
+			<xs:element  minOccurs="0" name="Asn_Preference" type="xs:string"/>
+			<xs:element  minOccurs="0" name="Operation_Type" type="xs:string"/>
+			<xs:element  minOccurs="0" name="EDI_Version" type="xs:string"/>
+			<xs:element  minOccurs="0" name="WarehouseCode" type="xs:string"/>
+			<!--Custom fields/  -->
+			
+		</xs:all>
+	</xs:complexType>
+	
+
+   
+</xs:schema>
+

@@ -1,0 +1,377 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>platform</artifactId>
+		<groupId>com.ab.oneleo.platform</groupId>
+		<version>2.0.0-pltf-RC1</version>
+	</parent>
+
+	<groupId>com.ab.oneleo.nld.datagenerator</groupId>
+	<artifactId>datagenerator-nld</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>datagenerator</name>
+
+	<properties>
+	
+		<maven-jar-plugin.project.version>2.3.2</maven-jar-plugin.project.version>
+		<dependency-springtesting.project.version>2.4</dependency-springtesting.project.version>
+		<com.ibm.mq.version>6.0.2</com.ibm.mq.version>
+		<springframework.version>3.2.2.RELEASE</springframework.version>
+		
+		<interoperability-framework.project.version>3.4.4</interoperability-framework.project.version>
+		<interoperability-api-version>1.9.1</interoperability-api-version>
+		<batchmanagement.project.version>1.7.0</batchmanagement.project.version>
+		
+		<oneleonardo-enumeration.project.version>2.5-SNAPSHOT</oneleonardo-enumeration.project.version>
+		<oneleonardo-businesskey.project.version>2.5-SNAPSHOT</oneleonardo-businesskey.project.version>
+		
+		<!-- EBS MODULES VERSION -->
+		<purchaseorderdatamanagement.enterprise.version>2.1-SNAPSHOT</purchaseorderdatamanagement.enterprise.version>
+		<salesordermanagement.enterprise.version>2.1-SNAPSHOT</salesordermanagement.enterprise.version>
+		<pricing.enterprise.version>2.1-SNAPSHOT</pricing.enterprise.version>
+		
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>nirvana</id>
+			<name>nirvana-repo</name>
+			<url>file://${project.basedir}/libs</url>
+		</repository>
+		<repository>
+			<id>jboss</id>
+			<name>jboss-repo</name>
+			<url>file://${project.basedir}/libs</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+	
+	<!-- MBEAN 
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-ejb-client-bom</artifactId>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.as</groupId>
+            <artifactId>jboss-as-jms-client-bom</artifactId>
+            <type>pom</type>
+        </dependency>
+	 MBEAN -->
+	
+		<dependency>
+			<groupId>nirvana</groupId>
+			<artifactId>nClient</artifactId>
+			<version>1.0</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>nirvana</groupId>
+			<artifactId>nJ2EE</artifactId>
+			<version>1.0</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>nirvana</groupId>
+			<artifactId>nJMS</artifactId>
+			<version>1.0</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>jboss</groupId>
+			<artifactId>jboss-client</artifactId>
+			<type>jar</type>
+			<version>10.0</version>
+		</dependency>  
+		
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.3</version>
+		</dependency> 
+		
+		<dependency>
+		    <groupId>jboss</groupId>
+		    <artifactId>jboss-jmx</artifactId>
+		    <version>4.2.2.GA</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.ab.ah.scad.acl</groupId>
+			<artifactId>acl-test</artifactId>
+			<version>${acl.project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ab.ah.scad.dependency</groupId>
+			<artifactId>dependency-springtesting</artifactId>
+			<version>${dependency-springtesting.project.version}</version>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>ojdbc6</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>ojdbc6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ab.oneleo.integration</groupId>
+			<artifactId>businesskey</artifactId>
+			<version>${oneleonardo-businesskey.project.version}</version>
+			<scope>compile</scope>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.ab.oneleo.integration</groupId>
+			<artifactId>enumeration</artifactId>
+			<version>${oneleonardo-enumeration.project.version}</version>
+			<scope>compile</scope>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.ab.ah.tsf.batchmanagement</groupId>
+			<artifactId>batchmanagement-service-api</artifactId>
+			<version>${batchmanagement.project.version}</version>
+			<scope>compile</scope>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.ab.ah.tsf.batchmanagement</groupId>
+			<artifactId>batchmanagement-service-impl</artifactId>
+			<version>${batchmanagement.project.version}</version>
+			<scope>compile</scope>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ab.oneleo</groupId>
+			<artifactId>interoperability-framework</artifactId>
+			<version>${interoperability-framework.project.version}</version>
+		</dependency>
+
+		
+		<!-- JMS WMQ -->
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mq</artifactId>
+			<version>${com.ibm.mq.version}</version>
+			<scope>compile</scope>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>com.ibm.mqjms</artifactId>
+			<version>${com.ibm.mq.version}</version>
+			<scope>compile</scope>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>dhbcore</artifactId>
+			<version>${com.ibm.mq.version}</version>
+			<scope>compile</scope>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm</groupId>
+			<artifactId>connector</artifactId>
+			<version>${com.ibm.mq.version}</version>
+			<scope>compile</scope>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.ab.oneleo.interoperability</groupId>
+			<artifactId>interoperability-service</artifactId>
+			<version>${interoperability-api-version}</version>
+		</dependency> 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.messaging.mq</groupId>
+			<artifactId>imqjmx</artifactId>
+			<version>4.3</version>
+		</dependency>
+				
+		<dependency>
+			<groupId>com.ab.ah.scad.acl</groupId>
+			<artifactId>acl-api</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.12</version>
+		</dependency>
+		
+		
+		<!-- EBS DEPENDENCY -->
+		<dependency>
+			<groupId>com.ab.oneleo.purchaseorderdatamanagement.enterprise</groupId>
+			<artifactId>purchaseorderdatamanagement-ebs-api</artifactId>
+			<version>${purchaseorderdatamanagement.enterprise.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.ab.oneleo.salesordermanagement.enterprise</groupId>
+			<artifactId>salesordermanagement-ebs-api</artifactId>
+			<version>${salesordermanagement.enterprise.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.ab.oneleo.pricing.enterprise</groupId>
+			<artifactId>pricing-ebs-api</artifactId>
+			<version>${pricing.enterprise.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- EBS DEPENDENCY -->
+		
+		
+	<!-- 	<exclusions>
+			<exclusion>
+				<groupId>com.ab.oneleo.gar.datagenerator</groupId>
+				<artifactId>datagenerator-gar</artifactId>
+			</exclusion>
+		</exclusions> -->
+				
+				
+	</dependencies>
+
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven-jar-plugin.project.version}</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>com.ab.oneleo.datageneration.DataGenerator</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>appassembler-maven-plugin</artifactId>
+				<version>1.3</version>
+				<executions>
+					<execution>
+						<!--id>jar-with-dependencies</id -->
+						<!-- id>bundle-project-sources</id -->
+						<phase>package</phase>
+						<goals>
+							<goal>assemble</goal>
+						</goals>
+						<configuration>
+							<programs>
+								<!--
+								<program>
+									<mainClass>com.ab.oneleo.datageneration.impl.Test</mainClass>
+									<name>Test</name>
+									<commandLineArguments>
+										<commandLineArgument>-op:main</commandLineArgument>
+										<commandLineArgument>-metadata:"false"</commandLineArgument>
+										<commandLineArgument>-zipOutput:"true"</commandLineArgument>
+									</commandLineArguments>
+								</program> 
+								-->
+								<!--<program>
+									<mainClass>com.ab.oneleo.datageneration.impl.CreatePurchaseOrderEmulator</mainClass>
+									<name>PurchaseOrderEmulator</name>
+									<commandLineArguments>
+										<commandLineArgument>-op:main</commandLineArgument>
+										<commandLineArgument>-metadata:"false"</commandLineArgument>
+										<commandLineArgument>-zipOutput:"true"</commandLineArgument>
+									</commandLineArguments>
+								</program>
+								<program>
+									<mainClass>com.ab.oneleo.datageneration.impl.CreateSalesOrderEmulator</mainClass>
+									<name>CreateSalesOrderEmulator</name>
+									<commandLineArguments>
+										<commandLineArgument>-op:main</commandLineArgument>
+										<commandLineArgument>-metadata:"false"</commandLineArgument>
+										<commandLineArgument>-zipOutput:"true"</commandLineArgument>
+									</commandLineArguments>
+								</program>-->
+								
+								<program>
+									<mainClass>com.ab.oneleo.jms.EnvelopeSenderNirvana</mainClass>
+									<name>EnvelopeSenderNirvana</name>
+									<commandLineArguments>
+										<commandLineArgument>-op:main</commandLineArgument>
+										<commandLineArgument>-metadata:"false"</commandLineArgument>
+										<commandLineArgument>-zipOutput:"true"</commandLineArgument>
+									</commandLineArguments>
+								</program>
+								<program>
+									<mainClass>com.ab.oneleo.jms.EnvelopeSenderJMX</mainClass>
+									<name>EnvelopeSenderJMX</name>
+									<commandLineArguments>
+										<commandLineArgument>-op:main</commandLineArgument>
+										<commandLineArgument>-metadata:"false"</commandLineArgument>
+										<commandLineArgument>-zipOutput:"true"</commandLineArgument>
+									</commandLineArguments>
+								</program>
+							</programs>
+							<configurationDirectory>bin/config</configurationDirectory>
+							<configurationSourceDirectory>${project.basedir}/src/main/resources/config</configurationSourceDirectory>
+							<assembleDirectory>${project.build.directory}/DataGenerator</assembleDirectory>
+							<repositoryLayout>flat</repositoryLayout>
+							<useWildcardClassPath>true</useWildcardClassPath>
+							<repositoryName>lib</repositoryName>
+							<extraJvmArguments>-Xmx1024m</extraJvmArguments>
+							<binFileExtensions>
+								<windows>.bat</windows>
+								<unix>.sh</unix>
+							</binFileExtensions>
+ 							<copyConfigurationDirectory>true</copyConfigurationDirectory>
+ 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>create-codeautomation-zip</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptor>src/main/assembly/bin.xml</descriptor>
+							<!--descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> 
+								</descriptorRefs -->
+							<!--archive> <manifest> <mainClass>com.ab.ah.scad.documentautomation.Application</mainClass> 
+								</manifest> </archive -->
+						</configuration>
+					</execution>
+				</executions>
+				<!--configuration> <descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> 
+					</descriptorRefs> <archive> <manifest> <mainClass>com.ab.ah.scad.codeautomation.Application</mainClass> 
+					</manifest> </archive> </configuration -->
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

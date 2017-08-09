@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns1:PurchaseOrder xmlns:ns1="http://tsf.ab.com/purchaseordermanagement">
+	<ns1:code>610-001041</ns1:code>
+	<ns1:notes>GM</ns1:notes>
+	<ns1:orderReference>GM</ns1:orderReference>
+	<ns1:orderType code="PO" />
+	<ns1:originalCode>610-001041</ns1:originalCode>
+	<!-- <ns1:originalOrderType code="YGRG"/> -->
+	<ns1:purchaseOrderLines>
+		<ns1:PurchaseOrderLine>
+			<ns1:batch>BGM</ns1:batch>
+			<ns1:buyingGroup>GM</ns1:buyingGroup>
+			<ns1:costPrice>
+				<ns1:amount>1</ns1:amount>
+				<ns1:isoCode>EUR</ns1:isoCode>
+				<ns1:symbol>1</ns1:symbol>
+			</ns1:costPrice>
+			<ns1:discountPercentage>50</ns1:discountPercentage>
+			<ns1:expectedQuantity>100</ns1:expectedQuantity>
+			<ns1:expiryDate>2016-07-27</ns1:expiryDate>
+			<ns1:freeQuantity>false</ns1:freeQuantity>
+			<ns1:internalCode>
+				<ns2:internalCode xmlns:ns2="http://tsf.ab.com/businesskey">000000000000408402
+				</ns2:internalCode>
+				<ns2:nationalCode xmlns:ns2="http://tsf.ab.com/businesskey" />
+				<ns2:secondaryNationalCode xmlns:ns2="http://tsf.ab.com/businesskey" />
+			</ns1:internalCode>
+			<ns1:lineNumber>1</ns1:lineNumber>
+			<ns1:originalLineNumber>1</ns1:originalLineNumber>
+			<ns1:originalQuantity>100</ns1:originalQuantity>
+			<ns1:productDescription>GM</ns1:productDescription>
+			<ns1:purchaseOrderLineAddInfos>
+				<ns1:PurchaseOrderLineAddInfo>
+					<ns1:destinationWarehouse>
+						<ns2:code xmlns:ns2="http://tsf.ab.com/businesskey">610</ns2:code>
+					</ns1:destinationWarehouse>
+					<ns1:mainWarehouse>
+						<ns2:code xmlns:ns2="http://tsf.ab.com/businesskey">610</ns2:code>
+					</ns1:mainWarehouse>
+					<ns1:quantity>100</ns1:quantity>
+				</ns1:PurchaseOrderLineAddInfo>
+			</ns1:purchaseOrderLineAddInfos>
+			<!-- <ns1:specialOrderCode>1234567890</ns1:specialOrderCode> 
+			<ns1:specialOrderLineNumber>1</ns1:specialOrderLineNumber> -->
+			<ns1:vatRate>10</ns1:vatRate>
+			<ns1:vendorType code="Manufacturer" />
+		</ns1:PurchaseOrderLine>
+	</ns1:purchaseOrderLines>
+	<ns1:scheduledDate>2016-07-27</ns1:scheduledDate>
+	<ns1:scheduledTime>2016-07-27T00:00:00</ns1:scheduledTime>
+	<ns1:supplierCode>
+		<ns2:code xmlns:ns2="http://tsf.ab.com/businesskey">0000000629</ns2:code>
+	</ns1:supplierCode>
+	<ns1:targetWarehouse>
+		<ns2:code xmlns:ns2="http://tsf.ab.com/businesskey">610</ns2:code>
+	</ns1:targetWarehouse>
+</ns1:PurchaseOrder>
+	

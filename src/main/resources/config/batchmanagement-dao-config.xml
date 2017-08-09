@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="batchDao" class="com.ab.ah.scad.acl.batchmanagement.dao.impl.JDBCTemplateDao">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean> 
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" scope="singleton">
+		<!-- <property name="dataSource" ref="dataSource${environment}" /> -->
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+
+
+	<bean id="batchDaoFromStaging" class="com.ab.ah.scad.acl.batchmanagement.dao.impl.JDBCTemplateDao">
+		<property name="jdbcTemplate" ref="jdbcTemplateStaging" />
+	</bean>
+	
+	<bean id="jdbcTemplateStaging" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSourceStaging" />
+	</bean>
+	
+	
+	<!-- ********************************* -->
+	<!-- ***** IBatis session config ***** -->
+	<!-- ********************************* -->
+
+	<bean id="batchSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeHandlersPackage" value="com.ab.ah.scad.acl.batchmanagement.dao.handler" />
+		<property name="mapperLocations" value="classpath*:/META-INF/config/sql/*-query-config.xml" />
+	</bean>
+</beans>

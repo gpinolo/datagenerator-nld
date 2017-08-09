@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Patient validation fault -->
+<pdm:Patient xmlns:pdm="http://tsf.ab.com/patientdatamanagement">
+	<pdm:addresss>
+
+	</pdm:addresss>
+	<pdm:code>3</pdm:code>
+	<pdm:dob>2000-09-29+02:00</pdm:dob>
+	<pdm:firstName>PatientScenario1</pdm:firstName>
+	<pdm:height>166.00</pdm:height>
+	<pdm:middleName>Domenico</pdm:middleName>
+	<pdm:surname>Ametrano</pdm:surname>
+</pdm:Patient>

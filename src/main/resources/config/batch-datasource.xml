@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	
+	<bean id="dataSourcePropertiesConfigurer"	class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="properties" ref="dataSourceProperties" />
+	</bean>
+
+	<bean id="dataSourceProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="ignoreResourceNotFound" value="false" />
+		<property name="locations">
+			<list>
+				<value>classpath:config/datasource.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- <property name="driverClass" value="${jdbc.driverClassName}"/>
+		<property name="jdbcUrl" value="${jdbc.url.${environment.db}}"/>
+		<property name="user" value="${jdbc.username.${environment.db}}"/>
+		<property name="password" value="${jdbc.password.${environment.db}}"/> -->
+	</bean>
+	
+	<!--STAGING -->
+	<bean id="dataSourceStaging" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- <property name="driverClass" value="${jdbc.driverClassNameStaging}" />
+		<property name="jdbcUrl" value="${jdbc.urlStaging.${environment.staging}}" />
+		<property name="user" value="${jdbc.usernameStaging.${environment.staging}}" />
+		<property name="password" value="${jdbc.passwordStaging.${environment.staging}}" /> -->
+	</bean> 
+	
+
+</beans>

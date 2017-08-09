@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"	
+	xmlns:context="http://www.springframework.org/schema/context" 	
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<context:annotation-config />
+
+	<tx:annotation-driven />
+	
+	<!-- mocked beans -->
+	<bean id="authenticationManager" class="com.ab.oneleo.mock.AuthenticationManagerMock" />
+
+	<bean id="authenticationEventPublisher" class="com.ab.oneleo.mock.AuthenticationManagerMock" />
+
+	<bean id="entityFactory" class="com.ab.ah.scad.acl.model.SpringConfigEntityFactory" />
+
+	<bean id="environmentAttibuteManager" class="com.ab.ah.scad.acl.test.mock.EnvironmentAttributeManagerMock" />
+	<!-- NOT GENERATED BEANS, ONLY FOR TEST -->
+
+
+
+	<!-- override this bean only for test - no xsd validation -->
+	<bean id="batchJaxbMarshaller" class="com.ab.ah.scad.batchmanagement.util.JAXBHelper">
+		<property name="packagesToScan">
+			<list>
+				<value>common.*</value>
+				<value>*.api.*.tsf</value>
+				<value>com.ab.tsf.*</value>
+				<value>com.ab.ah.scad.acl.batchmanagement.job.report.bean</value>
+			</list>
+		</property>
+		<property name="marshallerProperties">
+			<map>
+				<entry>
+					<key>
+						<util:constant static-field="javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT" />
+					</key>
+					<value type="java.lang.Boolean">true</value>
+				</entry>
+				<entry>
+					<key>
+						<util:constant static-field="javax.xml.bind.Marshaller.JAXB_ENCODING" />
+					</key>
+					<value type="java.lang.String">ASCII</value>
+				</entry>
+			</map>
+		</property>
+		<property name="schemas" ref="batchXsdSchemas" />
+	</bean>
+	
+	
+	<!-- BATCH SCHEMA LOADER -->
+	<bean id="batchLocalSchemaLSResolver" class="com.ab.ah.scad.batchmanagement.util.LocalSchemaLSResourceResolver">
+		<property name="schemaLoader" ref="batchSchemaLoader" />
+	</bean>
+	<bean id="batchSchemaLoader" class="com.ab.ah.scad.batchmanagement.util.SchemaLoader">
+		<property name="schemas" ref="batchXsdSchemas" />
+		<property name="schemaResourcesIncludes" ref="batchSchemaIncludesXSD" />
+	</bean>
+	<bean id="batchSchemaIncludesXSD" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>classpath*:/schema/integration/bk/*-bk.xsd</value>
+				<value>classpath*:/schema/integration/enum/*-enum.xsd</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="schemaLoader" class="com.ab.oneleo.interoperabilityframework.util.SchemaLoader">
+		<property name="schemas" ref="batchXsdSchemas" />
+		<property name="schemaResourcesIncludes" ref="schemaIncludesXSD" />
+	</bean>
+	<bean id="schemaIncludesXSD" class="java.util.LinkedList">
+		<constructor-arg>
+			<list>
+				<value>classpath*:/schema/integration/bk/*-bk.xsd</value>
+				<value>classpath*:/schema/integration/enum/*-enum.xsd</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="batchXsdSchemas" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>classpath*:/schema/integration/common/xsd/*-common.xsd</value>
+				<value>classpath*:/schema/integration/bk/business-key.xsd</value>
+				<value>classpath*:/schema/integration/enum/enumeration.xsd</value>
+				<value>classpath*:/schema/integration/*.xsd</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	
+	<!-- INTEGRATION_JAXB_HELPER -->
+	
+	<bean id="integrationSchemaLoader" class="com.ab.oneleo.interoperability.util.SchemaLoader">
+		<property name="schemas" ref="integrationSchemaXSD" />
+		<property name="schemaResourcesIncludes" ref="integrationSchemaIncludesXSD" />
+	</bean>
+	<bean id="integrationLsResourceResolver"
+		class="com.ab.oneleo.interoperability.util.LocalSchemaResourceResolver" >
+		<!-- <property name="schemaLoader" ref="integrationSchemaLoader"/> -->
+	</bean>
+
+	<bean id="integrationJaxbHelper" class="com.ab.oneleo.interoperability.util.JAXBHelper">
+		<property name="packagesToScan">
+			<list>
+				<value>common.*</value>
+				<value>*.api.*.tsf</value>
+				<value>com.ab.tsf.*</value>
+				<value>com.ab.tsf.esb.enterprise.envelope</value>
+				<value>com.ab.tsf.esb.enterprise.message</value>
+				<value>com.ab.tsf.esb.enterprise.event</value>
+				<value>com.ab.ah.scad.acl.batchmanagement.job.report.bean</value>
+			</list>
+		</property>
+		<property name="schemas" ref="integrationSchemaXSD" />
+		<property name="marshallerProperties">
+			<map>
+				<entry>
+					<key>
+						<util:constant static-field="javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT" />
+					</key>
+					<value type="java.lang.Boolean">true</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="integrationSchemaXSD" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>classpath*:/schema/integration/*.xsd</value>
+				<value>classpath*:/schema/integration/xsd/enterprise-message.xsd</value>
+				<value>classpath*:/schema/integration/xsd/enterprise-event.xsd</value>
+				<value>classpath*:/schema/integration/bk/business-key.xsd</value>
+				<value>classpath*:/schema/integration/enum/enumeration.xsd</value>
+				<value>classpath*:/schema/integration/common/xsd/*.xsd</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="integrationSchemaIncludesXSD" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<value>classpath*:/schema/integration/bk/*-bk.xsd</value>
+				<value>classpath*:/schema/integration/enum/*-enum.xsd</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+
+</beans>

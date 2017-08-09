@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:si-jms="http://www.springframework.org/schema/integration/jms"
+	xmlns:si="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/integration
+	http://www.springframework.org/schema/integration/spring-integration.xsd
+	http://www.springframework.org/schema/integration/jms
+	http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
+
+	<bean id="dataGeneratorProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="environment_db">${environment.db:}</prop>
+				<prop key="environment_staging">${environment.staging:}</prop>
+				<prop key="interfaceType">${interfaceType:}</prop>
+				<prop key="stagingTable">${stagingTable:}</prop>
+				<prop key="transactionID">${transactionID:}</prop>
+				<prop key="templateXmlPath">${templateXmlPath:}</prop>
+				<prop key="outputFilePath">${outputFilePath:}</prop>
+				<prop key="sqlFileName">${sqlFileName:}</prop>
+				<prop key="writeInsertSqlPath">${writeInsertSqlPath:}</prop>
+				
+				<prop key="patternMessageID">${patternMessageID:}</prop>
+				<prop key="startFromMessageID">${startFromMessageID:}</prop>
+				<prop key="prefixMessageID">${prefixMessageID:}</prop>
+				
+				<prop key="InterfaceOperation">${InterfaceOperation:}</prop>
+				<prop key="InterfaceID">${InterfaceID:}</prop>
+				<prop key="CountryID">${CountryID:}</prop>
+				<prop key="SiteID">${SiteID:}</prop>
+				<prop key="StoreID">${StoreID:}</prop>
+				<prop key="buildEnvelope">${buildEnvelope:}</prop>
+			</props>
+		</property> 
+	</bean>
+	
+
+</beans>
