@@ -13,13 +13,12 @@ public class Test implements SoapInterceptor{
 
 	public static void main(String[] args) {
 
-		
-		System.out.println(QName.class.getName());
+
 	}
 
 	@Override
 	public void handleMessage(SoapMessage message) throws Fault {
-		// TODO Auto-generated method stub
+
 		
 	}
 

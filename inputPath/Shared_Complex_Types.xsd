@@ -1,0 +1,1148 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="1.99" targetNamespace="http://www.cegedimrx.co.uk/mhs" xmlns="http://www.cegedimrx.co.uk/mhs" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:api="http://www.cegedimrx.co.uk/mhs" api:APIVersion="3.0">
+  <xs:include schemaLocation="Shared_Simple_Types.xsd" />
+  <xs:complexType name="SharedAddressStructureMandatory">
+    <xs:annotation>
+      <xs:documentation>A structure containing the shared elements of an address</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="5" name="addressLine" type="SharedAddressLineType">
+        <xs:annotation>
+          <xs:documentation>Address lines</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="postcode" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Postcode</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedAddressStructureMixed">
+    <xs:sequence>
+      <xs:element maxOccurs="5" name="addressLine" type="SharedAddressLineType">
+        <xs:annotation>
+          <xs:documentation>Address lines</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="postcode" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Postcode conforming to BS7666 postcode type standard</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedAddressStructureMixed2">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="5" name="addressLine" type="SharedAddressLineType">
+        <xs:annotation>
+          <xs:documentation>Address lines</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="postcode" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Postcode conforming to BS7666 postcode type standard</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedAddressStructureOptional">
+    <xs:annotation>
+      <xs:documentation>A structure containing the shared elements of an address</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="5" name="addressLine" type="SharedAddressLineType">
+        <xs:annotation>
+          <xs:documentation>Address lines</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="postcode" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Postcode</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedBusinessAcceptanceStructure">
+    <xs:sequence>
+      <xs:element name="code" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Acceptance reason code</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="codeSystem" type="xs:string" use="required">
+                <xs:annotation>
+                  <xs:documentation>Identifier of the code system from which the code originates. In England an OID shall be supplied that uniquely identifies the relevant Spine code system. In Scotland it shall identify AMS/CMS/MAS.</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="description" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Acceptance reason description</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedBusinessRejectionStructure">
+    <xs:sequence>
+      <xs:element name="code">
+        <xs:annotation>
+          <xs:documentation>The failure reason code</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="codeSystem" type="xs:string" use="required">
+                <xs:annotation>
+                  <xs:documentation>Identifier of the code system from which the code originates. In England an OID shall be supplied that uniquely identifies the relevant Spine code system. In Scotland it shall identify AMS/CMS/MAS.</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The failure reason description</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="additionalDetails" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Additional error details to aid fault diagnosis (optional)</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="currentDispenser" type="SharedCurrentDispenserStructure" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>Optional element, used to pass details of a third party who has possession of the requested prescription.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="freeText" type="xs:string" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>Free text additional error detail / advisory information (optional)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedControlDrugInformationStructure">
+    <xs:annotation>
+      <xs:documentation>A structure to contain control drug information</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="schedule" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>The schedule of a control drug</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="indicatorText" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Textual control drug indicator text, as printed on paper form</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedCurrentDispenserStructure">
+    <xs:sequence>
+      <xs:element name="organisation" type="SharedOrganisationStructureOptional">
+        <xs:annotation>
+          <xs:documentation>Details of organisation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="retrievalDateTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The date and time the prescription was retrieved by the third party</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedDateRangeStructureMandatory">
+    <xs:sequence>
+      <xs:element name="from" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Effective start date</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="to" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Effective end date</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedDateRangeStructureOptional">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="from" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Effective start date</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="to" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Effective end date</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedDispenserDetailsStructureMandatory">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about a prescriber</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="person" type="SharedHealthCareProStructureMandatory">
+        <xs:annotation>
+          <xs:documentation>Prescriber personal details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="organisation" type="SharedOrganisationStructureMandatory">
+        <xs:annotation>
+          <xs:documentation>Prescriber organisation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedDrugStructureMixed">
+    <xs:sequence>
+      <xs:element name="code" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Code associated with the medication (for example a dm+d VMP/AMP for prescribed or AMPP for dispensed), if applicable. Only used for encoded medication.</xs:documentation>
+          <!-- VMP -->
+          <!-- AMPP -->
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="SharedString50Type">
+              <xs:attribute name="dictionary" type="SharedString20Type" use="required">
+                <xs:annotation>
+                  <xs:documentation>Drug dictionary used to describe the medication. For example dm+d or multilex.</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+              <xs:attribute name="dictionaryVersion" type="SharedString20Type" use="optional">
+                <xs:annotation>
+                  <xs:documentation>Version of the drug dictionary</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="description" type="SharedString400Type">
+        <xs:annotation>
+          <xs:documentation>Free text description of the medication.</xs:documentation>
+          <!-- VMP -->
+          <!-- AMPP -->
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedDrugStructureMandatory">
+    <xs:sequence>
+      <xs:element name="code">
+        <xs:annotation>
+          <xs:documentation>Code associated with the medication (for example a dm+d VMP/AMP for prescribed or AMPP for dispensed), if applicable. Only used for encoded medication.</xs:documentation>
+          <!-- AMPP -->
+          <!-- VMP -->
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="SharedString50Type">
+              <xs:attribute name="dictionary" type="SharedString20Type" use="required">
+                <xs:annotation>
+                  <xs:documentation>Drug dictionary used to describe the medication. For example dm+d or multilex.</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+              <xs:attribute name="dictionaryVersion" type="SharedString20Type" use="optional">
+                <xs:annotation>
+                  <xs:documentation>Version of the drug dictionary</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="description" type="SharedString400Type">
+        <xs:annotation>
+          <xs:documentation>Free text description of the medication.</xs:documentation>
+          <!-- AMPP -->
+          <!-- VMP -->
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedHealthCareProIdStructure">
+    <xs:annotation>
+      <xs:documentation>A generic structure to contain ids for health care professionals using a value/type pair</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="SharedHealthCareProIdType">
+        <xs:attribute name="type" type="SharedHealthCareProIdTypeType" use="required">
+          <xs:annotation>
+            <xs:documentation>Coding scheme which the id belongs to</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SharedHealthCareProStructureMandatory">
+    <xs:sequence>
+      <xs:element name="name" type="SharedNameStructureMandatory">
+        <xs:annotation>
+          <xs:documentation>Healthcare professional name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="id" type="SharedHealthCareProIdStructure" maxOccurs="3">
+        <xs:annotation>
+          <xs:documentation>Healthcare professional identifier details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="profType" type="SharedProfType">
+        <xs:annotation>
+          <xs:documentation>Healthcare professional type, e.g. pharmacist, GP</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedHealthCareProStructureOptional">
+    <xs:sequence>
+      <xs:element name="name" type="SharedNameStructureOptional" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>GP name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="id" type="SharedHealthCareProIdStructure" minOccurs="0" maxOccurs="3">
+        <xs:annotation>
+          <xs:documentation>Healthcare professional identifier details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="profType" type="SharedProfType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Healthcare professional type, e.g. pharmacist, GP</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedOrganisationIdStructure">
+    <xs:annotation>
+      <xs:documentation>A generic structure to contain ids for organisations using a value/type pair</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="SharedOrganisationIdType">
+        <xs:attribute name="type" type="SharedOrganisationIdTypeType" use="required">
+          <xs:annotation>
+            <xs:documentation>Coding scheme which the id belongs to</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SharedMessageHeaderStructure">
+    <xs:sequence>
+      <xs:element name="service" type="SharedServiceStructure">
+        <xs:annotation>
+          <xs:documentation>The service the message is being sent to</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="APIVersion" type="SharedAPIVersionType">
+        <xs:annotation>
+          <xs:documentation>The version number of the common API that this message complies (i.e. this message is of format as defined in the given API pack version)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="type" type="SharedMessageType">
+        <xs:annotation>
+          <xs:documentation>The type of message being sent</xs:documentation>
+          <!-- Wales -->
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="sendingApplication" type="SharedSendingApplicationStructure">
+        <xs:annotation>
+          <xs:documentation>Sending application details including product name, version and author.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="transactionId" type="SharedGUIDType">
+        <xs:annotation>
+          <xs:documentation>Globally Unique Identifier for the given transaction this message belongs. Each 'request-response' conversation is treated as a single transaction, with the request and associated asynchronous response message sharing the same transaction id. Generated by the PMR for requests, mirrored back by the MHS in associated responses. This allows the PMR to  correlate an asynchronous response to its corresponding request.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="messageId" type="SharedGUIDType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Node used in batch responses only (England 'nominatedPrescriptionResponse' and Scotland 'registrationUpdatesResponse' / 'registrationDataRefreshResponse') to uniquely identify each message within the transactional batch. Not applicable to other response types, nor requests. There may be multiple common API 'nominatedPrescriptionResponse' / 'registrationUpdatesResponse' / 'registrationDataRefreshResponse' messages in response to a single common API request, each with the same transactionId but a different messageId.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TTL" type="xs:integer" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Time To Live (TTL). The amount of time in seconds that, in the event of recoverable exceptions, the MHS adaptor / MHS should retry sending this request message before deeming the transaction to have failed and aborting. Optional as only applicable to request messages (element should be ommited in response messages).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="sendDateTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>The date and time when the message was created by the sending application.</xs:documentation>
+          <xs:documentation>For request messages this will be the client PMR side datetime, and for responses the MHS server side datetime.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="unsolicitedIndicator" type="SharedBooleanType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Optional node to indicate whether this is a message for which there is no corresponding client request (i.e. unsolicited). This node should only be present for unsolicited message types - notably overnight 'nominatedPrescriptionResponse' and 'tokenDestruct' messages in England - in which case it should have a 'true' value. For all other types the node should not be present.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedNameStructureMandatory">
+    <xs:annotation>
+      <xs:documentation>A structure containing the shared elements of an individuals name.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="title" minOccurs="0" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals title</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="givenName" maxOccurs="5" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals given name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="familyName" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals family name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fullName" type="SharedString255Type">
+        <xs:annotation>
+          <xs:documentation>Full concatenated name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="birthFamilyName" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals birth family name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="suffix" minOccurs="0" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals suffix</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedNameStructureMixed">
+    <xs:annotation>
+      <xs:documentation>A structure containing the shared elements of an individuals name.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="title" minOccurs="0" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals title</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="givenName" minOccurs="0" maxOccurs="5" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals given name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="familyName" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals family name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fullName" type="SharedString255Type">
+        <xs:annotation>
+          <xs:documentation>Full concatenated name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="birthFamilyName" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals birth family name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="suffix" minOccurs="0" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals suffix</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedNameStructureOptional">
+    <xs:annotation>
+      <xs:documentation>A structure containing the shared elements of an individuals name.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="title" minOccurs="0" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals title</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="givenName" minOccurs="0" maxOccurs="5" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals given name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="familyName" minOccurs="0" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals family name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="fullName" type="SharedString255Type">
+        <xs:annotation>
+          <xs:documentation>Full concatenated name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="birthFamilyName" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals birth family name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="suffix" minOccurs="0" type="SharedString35Type">
+        <xs:annotation>
+          <xs:documentation>Individuals suffix</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedOrganisationStructureMandatory">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about a healthcare organisation, all elements mandatory</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="id" type="SharedOrganisationIdStructure" maxOccurs="3">
+        <xs:annotation>
+          <xs:documentation>Organisation ids (ODS, SDS, etc.)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="name" type="SharedString255Type">
+        <xs:annotation>
+          <xs:documentation>Organisation name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="type" type="SharedOrganisationTypeType">
+        <xs:annotation>
+          <xs:documentation>Type of organisation - e.g. pharmacy, GPPractice</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="address" type="SharedAddressStructureMixed2">
+        <xs:annotation>
+          <xs:documentation>Organisation address</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="telecom" type="SharedTelecomStructure" maxOccurs="unbounded" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Contact details of organisation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="parentOrganisation" type="SharedParentOrganisationStructure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Optional parent organisation details. For example details of the Clinical Commissioning Group (CCG) which the above organisation is a child.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedOrganisationStructureMixed">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about a healthcare organisation, used in registration requests/responses</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="id" type="SharedOrganisationIdStructure" maxOccurs="3">
+        <xs:annotation>
+          <xs:documentation>Organisation ids (ODS, SDS, etc.)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="name" type="SharedString255Type">
+        <xs:annotation>
+          <xs:documentation>Organisation name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="type" type="SharedOrganisationTypeType">
+        <xs:annotation>
+          <xs:documentation>Type of organisation - e.g. pharmacy, GPPractice</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="address" type="SharedAddressStructureOptional">
+        <xs:annotation>
+          <xs:documentation>Organisation address</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="telecom" type="SharedTelecomStructure" maxOccurs="unbounded" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Contact details of organisation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="parentOrganisation" type="SharedParentOrganisationStructure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Optional parent organisation details. For example details of the Clinical Commissioning Group (CCG) which the above organisation is a child.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedOrganisationStructureMixedWithDistance">
+    <xs:annotation>
+      <xs:documentation>Structure used to describe a pharmacy in an England 'dispensary' response. This is basically the shared organisation structure, plus a 'distance' node.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="SharedOrganisationStructureMixed">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="distance" type="xs:double">
+            <xs:annotation>
+              <xs:documentation>Proximity (in miles) of dispensary to requesting pharmacy</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SharedOrganisationStructureOptional">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about a healthcare organisation</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="id" type="SharedOrganisationIdStructure" minOccurs="0" maxOccurs="3">
+        <xs:annotation>
+          <xs:documentation>Organisation ids (ODS, SDS, etc.)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="name" minOccurs="0" type="SharedString255Type">
+        <xs:annotation>
+          <xs:documentation>Organisation name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="type" minOccurs="0" type="SharedOrganisationTypeType">
+        <xs:annotation>
+          <xs:documentation>Type of organisation - e.g. pharmacy, GPPractice</xs:documentation>
+          <!--    Community Pharmacy  -->
+          <!--    Community Pharmacy  -->
+          <!--    General Medical Practice -->
+          <!-- CCG -->
+          <!--    Community Pharmacy  -->
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="address" type="SharedAddressStructureMixed" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Organisation address</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="telecom" type="SharedTelecomStructure" maxOccurs="unbounded" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Contact details of organisation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="parentOrganisation" type="SharedParentOrganisationStructure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Optional parent organisation details. For example details of the Clinical Commissioning Group (CCG) which the above organisation is a child.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedParentOrganisationStructure">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about a parent healthcare organisation</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="id" type="SharedOrganisationIdStructure">
+        <xs:annotation>
+          <xs:documentation>Organisation id (ODS, SDS, etc.)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="name" minOccurs="0" type="SharedString255Type">
+        <xs:annotation>
+          <xs:documentation>Organisation name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="type" minOccurs="0" type="SharedOrganisationTypeType">
+        <xs:annotation>
+          <xs:documentation>Type of organisation - for example CCG</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedPatientDetailsStructureMixed">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about a patient, with a specific mixture of node optionality for certain use cases</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="id" type="SharedPatientIdStructure">
+        <xs:annotation>
+          <xs:documentation>NHS Number / Community Health Index (CHI) of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="name" type="SharedNameStructureOptional" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Patient name details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="address" type="SharedAddressStructureOptional" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Address of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dateOfBirth" type="SharedFlexibleDateType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Date of patients birth</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="gender" type="SharedGenderType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Gender of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="telecom" type="SharedTelecomStructure" maxOccurs="unbounded" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Contact details of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedPatientDetailsStructureMixed2">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about a patient, with a specific mixture of node optionality for certain use cases</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="id" type="SharedPatientIdStructure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>NHS Number / Community Health Index (CHI) of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="name" type="SharedNameStructureMandatory">
+        <xs:annotation>
+          <xs:documentation>Patient name details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="address" type="SharedAddressStructureMixed2">
+        <xs:annotation>
+          <xs:documentation>Address of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dateOfBirth" type="SharedFlexibleDateType">
+        <xs:annotation>
+          <xs:documentation>Date of patients birth</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="gender" type="SharedGenderType">
+        <xs:annotation>
+          <xs:documentation>Gender of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="telecom" type="SharedTelecomStructure" maxOccurs="unbounded" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Contact details of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedPatientDetailsStructureMixed3">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about a patient, all nodes mandatory</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="id" type="SharedPatientIdStructure">
+        <xs:annotation>
+          <xs:documentation>NHS Number / Community Health Index (CHI) of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="name" type="SharedNameStructureMandatory">
+        <xs:annotation>
+          <xs:documentation>Patient name details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="address" type="SharedAddressStructureOptional" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Address of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dateOfBirth" type="SharedFlexibleDateType">
+        <xs:annotation>
+          <xs:documentation>Date of patients birth</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="gender" type="SharedGenderType">
+        <xs:annotation>
+          <xs:documentation>Gender of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="telecom" type="SharedTelecomStructure" maxOccurs="unbounded" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Contact details of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedPatientDetailsStructureMixed4">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about a patient, with a specific mixture of node optionality for certain use cases</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="id" type="SharedPatientIdStructure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>NHS Number / Community Health Index (CHI) of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="name" type="SharedNameStructureMandatory">
+        <xs:annotation>
+          <xs:documentation>Patient name details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="address" type="SharedAddressStructureOptional" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Address of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dateOfBirth" type="SharedFlexibleDateType">
+        <xs:annotation>
+          <xs:documentation>Date of patients birth</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="gender" type="SharedGenderType">
+        <xs:annotation>
+          <xs:documentation>Gender of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="telecom" type="SharedTelecomStructure" maxOccurs="unbounded" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Contact details of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedPatientDetailsStructureOptional">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about a patient, all nodes optional</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="id" type="SharedPatientIdStructure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>NHS Number / Community Health Index (CHI) of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="name" type="SharedNameStructureOptional" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Patient name details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="address" type="SharedAddressStructureOptional" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Address of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="dateOfBirth" type="SharedFlexibleDateType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Date of patients birth</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="gender" type="SharedGenderType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Gender of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="telecom" type="SharedTelecomStructure" maxOccurs="unbounded" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Contact details of patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedPatientIdStructure">
+    <xs:annotation>
+      <xs:documentation>A generic structure to contain patient ids using a value/type pair</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="SharedPatientIdType">
+        <xs:attribute name="type" type="SharedPatientIdTypeType" use="required">
+          <xs:annotation>
+            <xs:documentation>Coding scheme which the id belongs to</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SharedPatientRepDetailsStructureMixed">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about a patient representative (i.e. someone who picks up medication on behalf of a patient), with mixed optionality for specific use cases</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="name" type="SharedNameStructureOptional">
+        <xs:annotation>
+          <xs:documentation>Structured name of receiver</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="address" type="SharedAddressStructureMixed" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Address details of medication receiver</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="telecom" type="SharedTelecomStructure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Contact details of the medication receiver</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="relationshipTypeCode" type="SharedPersonRelationshipTypeType">
+        <xs:annotation>
+          <xs:documentation>Coded value indicating the relationship of the medication receiver to the patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedPatientRepDetailsStructureOptional">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about a patient representative (i.e. someone who picks up medication on behalf of a patient), all optional</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="name" type="SharedNameStructureOptional" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Structured name of receiver</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="address" type="SharedAddressStructureOptional" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Address details of medication receiver</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="telecom" type="SharedTelecomStructure" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Contact details of the medication receiver</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="relationshipTypeCode" type="SharedPersonRelationshipTypeType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Coded value indicating the relationship of the medication receiver to the patient</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedPrescriberDetailsStructureMandatory">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about a prescriber</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="person" type="SharedHealthCareProStructureMandatory">
+        <xs:annotation>
+          <xs:documentation>Prescriber personal details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="organisation" type="SharedOrganisationStructureMandatory">
+        <xs:annotation>
+          <xs:documentation>Prescriber organisation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedPrescriberDetailsStructureOptional">
+    <xs:sequence>
+      <xs:element name="person" type="SharedHealthCareProStructureOptional" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Personal details of the prescriber</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="organisation" type="SharedOrganisationStructureOptional" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Organisation of prescriber</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedPrescriberEndorsementStructure">
+    <xs:annotation>
+      <xs:documentation>A structure to contain information about prescriber endorsements</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="prescriberEndorsementValue" type="SharedPrescriberEndorsementValueType">
+        <xs:annotation>
+          <xs:documentation>Prescriber endorsement type</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="prescriberEndorsementText" type="SharedString100Type">
+        <xs:annotation>
+          <xs:documentation>Prescriber endorsement support information</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedQuantityStructure">
+    <xs:sequence>
+      <xs:element name="value">
+        <xs:annotation>
+          <xs:documentation>Quantity of medication supplied</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+              <xs:attribute name="text" type="SharedString200Type" use="optional">
+                <xs:annotation>
+                  <xs:documentation>Description of quantity value, used in connection with certain controlled drug schedules</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="UOM" type="SharedUOMStructure" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedRequestSecurityDataStructure">
+    <xs:annotation>
+      <xs:documentation>Common security data elements</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="fromOrganisationSiteId" type="SharedSiteIdType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The unique MHS assigned site identifier of the requesting organisation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="fromOrganisationNHSId" type="SharedOrganisationIdType">
+        <xs:annotation>
+          <xs:documentation>NHS ID of requesting organisation (ODS code)</xs:documentation>
+          <!-- For Scotland sample responses we shall use SCC code -->
+          <!-- For all others we shall use ODS code -->
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedResponseSecurityDataStructure">
+    <xs:annotation>
+      <xs:documentation>A structure to describe the pharmacy the response message is for. May be used by PMR as a routing validation check.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="toOrganisationNHSId" type="SharedOrganisationIdType">
+        <xs:annotation>
+          <xs:documentation>NHS ID of the organisation the response message is for. This will be a 4 digit 'Contractor Code' for Scottish pharmacies, and an ODS (previously known as NACS) code for English pharmacies.</xs:documentation>
+          <!-- For Scotland sample responses we shall use a SCC code -->
+          <!-- For all others we shall use a ODS code -->
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedSendingApplicationStructure">
+    <xs:annotation>
+      <xs:documentation>Name of the application that generated the request/response.</xs:documentation>
+      <xs:documentation>Note for responses this is the name of the originating application (for example 'EPMS' or Spine 'ETP/PDS/IAM'), as opposed to MHS which is just an intermediary.</xs:documentation>
+      <xs:documentation>Although the MHS generates the API response, the actual response content originates from EPMS/Spine, apart from a 'transactionAborted' response which originates from MHS.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="version" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>Version number of the application that generated the request/response.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="author" type="xs:string" use="required">
+          <xs:annotation>
+            <xs:documentation>Company that authors the application</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="clientAdapterVersion" type="xs:string" use="optional">
+          <xs:annotation>
+            <xs:documentation>Optional version number of the client adapter component that sent the message</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SharedServiceConfigStructure">
+    <xs:annotation>
+      <xs:documentation>Shared structure for configuring an MHS service parameter. It is intended to use a generic config structure which may be used to configure multiple future parameters, regardless of parameter name or datatype.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="parameter" type="SharedServiceConfigParameterType">
+        <xs:annotation>
+          <xs:documentation>Name of the service parameter to configure</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="value" type="SharedString200Type">
+        <xs:annotation>
+          <xs:documentation>Value the parameter should be set to. The datatype is defined as string to make it as generic as possible. The idea being that new config parameters may be added in future, re-using the same 'serviceConfig' message and structure, regardless of specific datatype. The MHS routing slip that processes the config request may apply specific datatype validation though if applicable.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedServiceStructure">
+    <xs:annotation>
+      <xs:documentation>Shared structure for definining service elements</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="provider" type="SharedServiceProviderType">
+        <xs:annotation>
+          <xs:documentation>The organisation that provides the service</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="region" type="SharedServiceRegionType">
+        <xs:annotation>
+          <xs:documentation>The region in which the service is provided</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="domain" type="SharedServiceDomainType">
+        <xs:annotation>
+          <xs:documentation>The service group (referred to as 'domain'). For example the English implementation of ETP can be considered to be split into service domains of EPS, PDS and IAM. See the API documentation for further detail.</xs:documentation>
+          <!-- Electronic Prescription Service -->
+          <!-- Choose and Book -->
+          <!-- Patient Demograhics Service -->
+          <!-- Identity and Access Management -->
+          <!-- Wales -->
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedTelecomStructure">
+    <xs:annotation>
+      <xs:documentation>Communication number/address. For example a Telephone number, a fax number, an email address, etc.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="SharedContactMethodType" use="required">
+          <xs:annotation>
+            <xs:documentation>Type of communication method</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="use" type="SharedContactMethodUseType" use="optional">
+          <xs:annotation>
+            <xs:documentation>Communication method use</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="id" type="xs:string" use="optional">
+          <xs:annotation>
+            <xs:documentation>The ID of the contact information used for updates (England)</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SharedTransactionAbortedStructure">
+    <xs:sequence>
+      <xs:element name="direction" type="SharedDirectionType">
+        <xs:annotation>
+          <xs:documentation>Indicates whether the exception occurred during 'request' (outbound) or 'response' (inbound) processing</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="code" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Internal MHS error code, defining reason for aborting message transmission</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Internal MHS error description, defining reason for aborting message transmission</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="diagnostics" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Internal MHS diagnostic details.  Extended details for the MHS to populate with diagnostic text such as additional text returned from the spine web service</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SharedUOMStructure">
+    <xs:sequence>
+      <xs:element name="code" type="SharedUOMCodeType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>SnomedCT code for unit of measure</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="description" type="SharedString200Type">
+        <xs:annotation>
+          <xs:documentation>Quantity Unit Of Measure Description</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

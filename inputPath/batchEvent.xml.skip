@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Envelope OK -->
+<tns:Envelope xmlns:tns="http://esb.tsf.ab.com/enterprise/message" xmlns:event="http://esb.tsf.ab.com/enterprise/event">
+    <tns:Header>
+        <tns:StandardHeader>
+            <tns:SourceID>VPS</tns:SourceID>
+            <tns:SourceApplicationID>VPS</tns:SourceApplicationID>
+            <tns:MessageID>gie8de2a-b665-407c-b00a-479613ed55f14</tns:MessageID>
+            <tns:MessageCreationDatetime>2016-02-16T10:47:26.949+02:00</tns:MessageCreationDatetime>
+            <tns:MessageDataFormat>XML</tns:MessageDataFormat>
+            <tns:InterfaceOperation>importPatientsFromStaging</tns:InterfaceOperation>
+            <tns:CountryID>GBD</tns:CountryID>
+            <tns:SiteID>610</tns:SiteID>
+            <tns:CompanyID>Alliance</tns:CompanyID>
+            <tns:StoreID>610</tns:StoreID>
+        </tns:StandardHeader>
+
+    </tns:Header>
+    <tns:Body>
+        <event:Event>
+            <event:action>startDataExport</event:action>
+            <event:transactionID>07062018</event:transactionID>
+        </event:Event>
+    </tns:Body>
+</tns:Envelope>

@@ -157,14 +157,14 @@ public class EnvelopeSenderNirvana {
 				throw new Exception("NO ENVELOPE FOUND!!!");
 			}
 			
-			logger.info("Messages to be sent: "+listEnvelope.size());
+			logger.info("Sending " + listEnvelope.size() + " messages on " + outboundQueue);
 
       for (Map.Entry<String, String> entry : listEnvelope.entrySet()) {
  
         TextMessage message = session.createTextMessage(entry.getValue());
         
         //MANUEL: per l'esecuzione del tenant id
-//       message.setStringProperty("tenantId", "TENANT2");
+       message.setStringProperty("tenantId", "");
 
         message.setStringProperty("my_jms_header_property", entry.getKey());
         //message.setJMSReplyTo(new DestinationImpl("com/oneleo/platform/outbound"));
@@ -615,13 +615,6 @@ public class EnvelopeSenderNirvana {
 		p.put(Context.INITIAL_CONTEXT_FACTORY, envelopeSenderProperties.getProperty(INITIAL_CONTEXT_FACTORY));
 		p.put(Context.URL_PKG_PREFIXES,envelopeSenderProperties.getProperty(URL_PKG_PREFIXES));
 		p.put(Context.PROVIDER_URL, envelopeSenderProperties.getProperty(PROVIDER_URL));
-		
-		/*
-		p.put(Context.INITIAL_CONTEXT_FACTORY, "com.pcbsys.nirvana.nSpace.NirvanaContextFactory");
-		p.put(Context.URL_PKG_PREFIXES, "com.pcbsys.nirvana.nSpace");
-		//p.put(Context.PROVIDER_URL, "nsp://127.0.0.1:9000");
-		p.put(Context.PROVIDER_URL, "nsp://10.141.128.238:9000");
-		 */
 
 		InitialContext initialContext = new javax.naming.InitialContext(p);
 		return initialContext;

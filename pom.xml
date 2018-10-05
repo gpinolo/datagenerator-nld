@@ -26,8 +26,8 @@
 		<interoperability-api-version>1.9.1</interoperability-api-version>
 		<batchmanagement.project.version>1.7.0</batchmanagement.project.version>
 		
-		<oneleonardo-enumeration.project.version>2.5-SNAPSHOT</oneleonardo-enumeration.project.version>
-		<oneleonardo-businesskey.project.version>2.5-SNAPSHOT</oneleonardo-businesskey.project.version>
+		<oneleonardo-enumeration.project.version>2.5</oneleonardo-enumeration.project.version>
+		<oneleonardo-businesskey.project.version>2.5</oneleonardo-businesskey.project.version>
 		
 		<!-- EBS MODULES VERSION -->
 		<purchaseorderdatamanagement.enterprise.version>2.1-SNAPSHOT</purchaseorderdatamanagement.enterprise.version>
@@ -221,7 +221,7 @@
 		
 		
 		<!-- EBS DEPENDENCY -->
-		<dependency>
+		<!--<dependency>
 			<groupId>com.ab.oneleo.purchaseorderdatamanagement.enterprise</groupId>
 			<artifactId>purchaseorderdatamanagement-ebs-api</artifactId>
 			<version>${purchaseorderdatamanagement.enterprise.version}</version>
@@ -238,7 +238,7 @@
 			<artifactId>pricing-ebs-api</artifactId>
 			<version>${pricing.enterprise.version}</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency>-->
 		<!-- EBS DEPENDENCY -->
 		
 		

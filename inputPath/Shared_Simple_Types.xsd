@@ -1,0 +1,1137 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="1.51" targetNamespace="http://www.cegedimrx.co.uk/mhs" xmlns="http://www.cegedimrx.co.uk/mhs" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:api="http://www.cegedimrx.co.uk/mhs" api:APIVersion="3.0">
+  <xs:simpleType name="SharedAddressLineType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="35" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedAPIVersionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="3.0" />
+      <!-- Variable to be replaced by actual API version number during API pack build -->
+      <!-- Variable to be replaced by actual API version number during API pack build -->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedBooleanType">
+    <xs:restriction base="xs:boolean">
+      <xs:pattern value="true" />
+      <xs:pattern value="false" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedBooleanWithUnknownType">
+    <!-- Certain Boolean type fields such as consent want to allow for unknown i.e. we don't know if true or false. This data type caters for this.-->
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="true" />
+      <xs:enumeration value="false" />
+      <xs:enumeration value="unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedContactMethodType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="TEL" />
+      <xs:enumeration value="MOBILE" />
+      <xs:enumeration value="FAX" />
+      <xs:enumeration value="EMAIL" />
+      <xs:enumeration value="TEXTPHONE" />
+      <xs:enumeration value="UNKNOWN" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedContactMethodUseType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="H">
+        <xs:annotation>
+          <xs:documentation>A communication address at a home</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HP">
+        <xs:annotation>
+          <xs:documentation>The primary home, to reach a person after business hours</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HV">
+        <xs:annotation>
+          <xs:documentation>A vacation home, to reach a person while on vacation</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AS">
+        <xs:annotation>
+          <xs:documentation>An automated answering machine</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WP">
+        <xs:annotation>
+          <xs:documentation>An office address</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MC">
+        <xs:annotation>
+          <xs:documentation>A telecommunication device that moves and stays with its owner</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PG">
+        <xs:annotation>
+          <xs:documentation>A paging device suitable to solicit a callback or to leave a very short message</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EC">
+        <xs:annotation>
+          <xs:documentation>A contact specifically designated to be used for emergencies</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedSiteIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{5}" />
+      <!-- SiteId numbers are of a 5 digit format and must be left padded with 0s if necessary e.g. 00123 -->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedDirectionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="request" />
+      <xs:enumeration value="response" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedEthnicityType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="not stated" />
+      <xs:enumeration value="british" />
+      <xs:enumeration value="irish" />
+      <xs:enumeration value="white background" />
+      <xs:enumeration value="white black caribbean" />
+      <xs:enumeration value="white black african" />
+      <xs:enumeration value="white asian" />
+      <xs:enumeration value="mixed background" />
+      <xs:enumeration value="indian" />
+      <xs:enumeration value="pakistani" />
+      <xs:enumeration value="bangladeshi" />
+      <xs:enumeration value="other asian background" />
+      <xs:enumeration value="caribbean" />
+      <xs:enumeration value="african" />
+      <xs:enumeration value="other black background" />
+      <xs:enumeration value="chinese" />
+      <xs:enumeration value="any other ethnic group" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedFlexibleDateType">
+    <xs:union memberTypes="SharedYearType SharedYearMonthType xs:date" />
+    <!-- One of YYYY, YYYY-MM or YYYY-MM-DD -->
+  </xs:simpleType>
+  <xs:simpleType name="SharedGUIDType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedGenderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="m">
+        <xs:annotation>
+          <xs:documentation>Male</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="f">
+        <xs:annotation>
+          <xs:documentation>Female</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="i">
+        <xs:annotation>
+          <xs:documentation>Indeterminate. Not classified as either male or female.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="u">
+        <xs:annotation>
+          <xs:documentation>Unknown</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedHealthCareProIdType">
+    <!-- Health Care Professional -->
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="20" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedHealthCareProIdTypeType">
+    <!-- Health Care Professional -->
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DIN">
+        <xs:annotation>
+          <xs:documentation>Doctor Index Number</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GMC">
+        <xs:annotation>
+          <xs:documentation>General Medical Council</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GPhC">
+        <xs:annotation>
+          <xs:documentation>General Pharmaceutical Council</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NMC">
+        <xs:annotation>
+          <xs:documentation>Nursing and Midwifery Council</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SDS">
+        <xs:annotation>
+          <xs:documentation>Spine Directory Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ODS">
+        <xs:annotation>
+          <xs:documentation>Organisation Data Service (previously known as NACS)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Other">
+        <xs:annotation>
+          <xs:documentation>None of the above</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedMessageType">
+    <xs:restriction base="xs:string">
+      <!-- Types used by both Regions -->
+      <xs:enumeration value="prescription" />
+      <xs:enumeration value="prescriptionRequest" />
+      <xs:enumeration value="prescriptionResponse" />
+      <xs:enumeration value="dispenseClaim" />
+      <xs:enumeration value="businessAcceptance" />
+      <xs:enumeration value="businessRejection" />
+      <xs:enumeration value="transactionAborted" />
+      <xs:enumeration value="serviceConfig" />
+      <xs:enumeration value="amendItem" />
+      <xs:enumeration value="cancelItem" />
+      <!-- England Specific-->
+      <xs:enumeration value="dispensary" />
+      <xs:enumeration value="dispenseNotification" />
+      <xs:enumeration value="dispenseRebuild" />
+      <xs:enumeration value="dispenseProposalReturn" />
+      <xs:enumeration value="dispenseWithdraw" />
+      <xs:enumeration value="findPatient" />
+      <xs:enumeration value="findPatientSimple" />
+      <xs:enumeration value="generalUpdateRequest" />
+      <xs:enumeration value="generalUpdateSuccess" />
+      <xs:enumeration value="getDispensary" />
+      <xs:enumeration value="getOrganisation" />
+      <xs:enumeration value="getPatient" />
+      <xs:enumeration value="getPerson" />
+      <xs:enumeration value="getRBAC" />
+      <xs:enumeration value="findPatientMatches" />
+      <xs:enumeration value="nominatedPrescriptionRequest" />
+      <xs:enumeration value="nominatedPrescriptionRequestAuto" />
+      <xs:enumeration value="nominatedPrescriptionResponse" />
+      <xs:enumeration value="organisation" />
+      <xs:enumeration value="patient" />
+      <xs:enumeration value="person" />
+      <xs:enumeration value="RBAC" />
+      <xs:enumeration value="tokenDestruct" />
+      <xs:enumeration value="parentPrescriptionRequest" />
+      <xs:enumeration value="parentPrescriptionNonUrgentRequest" />
+      <xs:enumeration value="cancelRequest" />
+      <xs:enumeration value="cancelResponse" />
+      <xs:enumeration value="subsequentCancelResponse" />
+      <!-- Choose and Book -->
+      <xs:enumeration value="requestServiceRequest" />
+      <xs:enumeration value="referralRequest" />
+      <xs:enumeration value="confirmServiceRequestResponse" />
+      <!-- Scotland Specific -->
+      <xs:enumeration value="cancelSupplyClaimRequest" />
+      <xs:enumeration value="cancelDispenseClaim" />
+      <xs:enumeration value="complianceNotification" />
+      <xs:enumeration value="registrationDataRefreshRequest" />
+      <xs:enumeration value="registrationDataRefreshResponse" />
+      <xs:enumeration value="registrationRequest" />
+      <xs:enumeration value="registrationResponse" />
+      <xs:enumeration value="registrationStatusRequest" />
+      <xs:enumeration value="registrationStatusResponse" />
+      <xs:enumeration value="registrationUpdatesRequest" />
+      <xs:enumeration value="registrationUpdatesRequestAuto" />
+      <xs:enumeration value="registrationUpdatesResponse" />
+      <xs:enumeration value="supplyClaimRequest" />
+      <xs:enumeration value="supplyNotificationRequest" />
+      <xs:enumeration value="complianceUpdates" />
+      <xs:enumeration value="treatmentUpdates" />
+      <xs:enumeration value="treatmentSummary" />
+      <!-- Healthi Specific -->
+      <xs:enumeration value="patient" />
+      <xs:enumeration value="medicationSupplyRequest" />
+      <xs:enumeration value="HCPPrescribeEvent" />
+      <xs:enumeration value="HCPDispenseEvent" />
+      <!-- Wales Specific -->
+      <xs:enumeration value="claimSubmissionRequest" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedOrganisationIdType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedOrganisationIdTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SCC">
+        <xs:annotation>
+          <xs:documentation>Scottish Contractor Code</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GMC">
+        <xs:annotation>
+          <xs:documentation>General Medical Code</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ODS">
+        <xs:annotation>
+          <xs:documentation>Organisation Data Service (previously known as NACS)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SDS">
+        <xs:annotation>
+          <xs:documentation>Spine Directory Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedOrganisationNameType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="255" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedOrganisationTypeType">
+    <xs:annotation>
+      <xs:documentation>Healthcare organisation</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="GPpractice">
+        <xs:annotation>
+          <xs:documentation>General Medical Practice</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="001">
+        <xs:annotation>
+          <xs:documentation>General Medical Practice</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="002">
+        <xs:annotation>
+          <xs:documentation>General  Dental Practice</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="003">
+        <xs:annotation>
+          <xs:documentation>Community Pharmacy </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="004">
+        <xs:annotation>
+          <xs:documentation>Community Opticians</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="005">
+        <xs:annotation>
+          <xs:documentation>Primary Care Trust</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="006">
+        <xs:annotation>
+          <xs:documentation>Strategic Health Authority </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="007">
+        <xs:annotation>
+          <xs:documentation>Special Health Authority </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="008">
+        <xs:annotation>
+          <xs:documentation>Acute Trust </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="009">
+        <xs:annotation>
+          <xs:documentation>Care Trust </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="010">
+        <xs:annotation>
+          <xs:documentation>Community Trust</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="011">
+        <xs:annotation>
+          <xs:documentation>Diagnostic and Investigation Centre </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="012">
+        <xs:annotation>
+          <xs:documentation>Walk-in Centre </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="013">
+        <xs:annotation>
+          <xs:documentation>NHS Direct </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="014">
+        <xs:annotation>
+          <xs:documentation>Local Authority Social Services Department</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="015">
+        <xs:annotation>
+          <xs:documentation>Nursing Home</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="016">
+        <xs:annotation>
+          <xs:documentation>Residential Home</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="017">
+        <xs:annotation>
+          <xs:documentation>Hospice</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="018">
+        <xs:annotation>
+          <xs:documentation>Ambulance Trust</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="019">
+        <xs:annotation>
+          <xs:documentation>Private Hospital</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="020">
+        <xs:annotation>
+          <xs:documentation>GMP Deputising Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="021">
+        <xs:annotation>
+          <xs:documentation>Nursing Agency</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="999">
+        <xs:annotation>
+          <xs:documentation>Not specified</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedPatientIdType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{10}" />
+      <!-- Patient NHS numbers (England/Wales) and CHI numbers (Scotland) are both of 10 digit format -->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedPatientIdTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NHS">
+        <xs:annotation>
+          <xs:documentation>NHS number (England/Wales)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CHI">
+        <xs:annotation>
+          <xs:documentation>Community Health Index number (Scotland)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedPersonRelationshipTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="01">
+        <xs:annotation>
+          <xs:documentation>Spouse</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="02">
+        <xs:annotation>
+          <xs:documentation>Partner</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="03">
+        <xs:annotation>
+          <xs:documentation>Parent</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="04">
+        <xs:annotation>
+          <xs:documentation>Next of kin</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="05">
+        <xs:annotation>
+          <xs:documentation>Guardian</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="06">
+        <xs:annotation>
+          <xs:documentation>Foster parent</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="07">
+        <xs:annotation>
+          <xs:documentation>Step parent</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="08">
+        <xs:annotation>
+          <xs:documentation>Polygamous partner</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="09">
+        <xs:annotation>
+          <xs:documentation>Child</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="10">
+        <xs:annotation>
+          <xs:documentation>Dependant</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="11">
+        <xs:annotation>
+          <xs:documentation>Non-dependant</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="12">
+        <xs:annotation>
+          <xs:documentation>Mother</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="13">
+        <xs:annotation>
+          <xs:documentation>Father</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="14">
+        <xs:annotation>
+          <xs:documentation>Sister</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="15">
+        <xs:annotation>
+          <xs:documentation>Brother</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="16">
+        <xs:annotation>
+          <xs:documentation>Relative</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="17">
+        <xs:annotation>
+          <xs:documentation>Proxy - Contact</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="18">
+        <xs:annotation>
+          <xs:documentation>Proxy - Communication</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="19">
+        <xs:annotation>
+          <xs:documentation>Proxy - Contact and Communication</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="20">
+        <xs:annotation>
+          <xs:documentation>Carer</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="21">
+        <xs:annotation>
+          <xs:documentation>Self</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="98">
+        <xs:annotation>
+          <xs:documentation>Not Known</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="99">
+        <xs:annotation>
+          <xs:documentation>Not specified</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedPostcodeType">
+    <xs:annotation>
+      <xs:documentation>Needs to conform to BS7666 postcode type standard</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][A-Z]{2}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedPrescriberEndorsementValueType">
+    <xs:annotation>
+      <xs:documentation>Prescriber endorsement details</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <!-- Types used by both regions -->
+      <xs:enumeration value="SLS" />
+      <xs:enumeration value="ACBS" />
+      <!-- England Specific -->
+      <xs:enumeration value="CC" />
+      <xs:enumeration value="AF" />
+      <!-- Scotland Specific -->
+      <xs:enumeration value="Contraceptive" />
+      <xs:enumeration value="instalmentdispensing" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedPrescriptionFormStatusType">
+    <xs:annotation>
+      <xs:documentation>See 'prescription form status workflow' diagram in appendix 5B of the England API documentation (note applicable to both England and Scotland regions)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PEN">
+        <xs:annotation>
+          <xs:documentation>Pending</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ACT">
+        <xs:annotation>
+          <xs:documentation>Active </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NDIS">
+        <xs:annotation>
+          <xs:documentation>Not Dispensed</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DIS">
+        <xs:annotation>
+          <xs:documentation>Dispensed</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedPrescriptionFormTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0001">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0002">
+        <xs:annotation>
+          <xs:documentation>Intentionally left blank </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0003">
+        <xs:annotation>
+          <xs:documentation>Nurse Practitioner Prescribing </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0004">
+        <xs:annotation>
+          <xs:documentation>Hospital Prescribing </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0005">
+        <xs:annotation>
+          <xs:documentation>Intentionally left blank </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0006">
+        <xs:annotation>
+          <xs:documentation>Dental Prescribing </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0007">
+        <xs:annotation>
+          <xs:documentation>Supplementary Prescriber Prescribing </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0008">
+        <xs:annotation>
+          <xs:documentation>Intenionally left blank </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0009">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing: Private </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0010">
+        <xs:annotation>
+          <xs:documentation>Intentionally left blank </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0011">
+        <xs:annotation>
+          <xs:documentation>Intentionally left blank </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0012">
+        <xs:annotation>
+          <xs:documentation>Extended Forumulary Prescriber </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0101">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - GP </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0102">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - Trainee Doctor/GP Registrar </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0103">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - Deputising Services </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0104">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - Practice employed Nurse Independent/Supplementary prescriber </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0105">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - Practice employed Community Practitioner Nurse prescriber </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0106">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - PCT employed Nurse Independent/Supplementary prescriber </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0107">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - PCT employed Community Practitioner Nurse prescriber </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0108">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - Practice employed Pharmacist prescriber </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0109">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - PCT employed Pharmacist prescriber </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0110">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - Locum </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0113">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - Practice employed Optometrist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0114">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - Practice employed Podiatrist/Chiropodist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0116">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - Practice employed Radiographer </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0117">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - Practice employed Physiotherapist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0119">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - PCT employed Podiatrist/Chiropodist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0120">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - PCT employed Optometrist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0121">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - PCT employed Radiographer </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0122">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - PCT employed Physiotherapist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0123">
+        <xs:annotation>
+          <xs:documentation>General Practitioner Prescribing - Hospital prescriber </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0304">
+        <xs:annotation>
+          <xs:documentation>Nurse Practitioner - Practice employed Nurse Independent/Supplementary prescriber </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0305">
+        <xs:annotation>
+          <xs:documentation>Nurse Practitioner - Practice employed Community Practitioner Nurse prescriber </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0306">
+        <xs:annotation>
+          <xs:documentation>Nurse Practitioner - Practice employed Nurse Independent/Supplementary prescriber </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0307">
+        <xs:annotation>
+          <xs:documentation>Nurse Practitioner - Practice employed Community Practitioner Nurse prescriber </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0406">
+        <xs:annotation>
+          <xs:documentation>Hospital Prescribing - Hospital Prescriber </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0607">
+        <xs:annotation>
+          <xs:documentation>Dental Prescribing - Dentist</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0708">
+        <xs:annotation>
+          <xs:documentation>Supplementary Prescribing - Practice employed Pharmacist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0709">
+        <xs:annotation>
+          <xs:documentation>Supplementary Prescribing - PCT employed Pharmacist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0713">
+        <xs:annotation>
+          <xs:documentation>Supplementary Prescribing - Practice employed Optometrist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0714">
+        <xs:annotation>
+          <xs:documentation>Supplementary Prescribing - Practice employed Podiatrist/Chiropodist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0716">
+        <xs:annotation>
+          <xs:documentation>Supplementary Prescribing - Practice employed Radiographer </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0717">
+        <xs:annotation>
+          <xs:documentation>Supplementary Prescribing - Practice employed Physiotherapist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0718">
+        <xs:annotation>
+          <xs:documentation>Supplementary Prescribing - PCT employed Optometrist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0719">
+        <xs:annotation>
+          <xs:documentation>Supplementary Prescribing - PCT employed Podiatrist/Chiropodist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0721">
+        <xs:annotation>
+          <xs:documentation>Supplementary Prescribing - PCT employed Radiographer </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0722">
+        <xs:annotation>
+          <xs:documentation>Supplementary Prescribing - PCT employed Physiotherapist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0901">
+        <xs:annotation>
+          <xs:documentation>Private Prescribing - GP </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0904">
+        <xs:annotation>
+          <xs:documentation>Private Prescribing - Nurse prescribing </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0908">
+        <xs:annotation>
+          <xs:documentation>Private Prescribing - Pharmacist prescribing </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0913">
+        <xs:annotation>
+          <xs:documentation>Private Prescribing - Optometrist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0914">
+        <xs:annotation>
+          <xs:documentation>Private Prescribing - Podiatrist/Chiropodist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0915">
+        <xs:annotation>
+          <xs:documentation>Private Prescribing - Physiotherapist </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="0916">
+        <xs:annotation>
+          <xs:documentation>Private Prescribing - Radiographer</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <!--  New enumeration added by CRx to cover PGD prescribing events from HCP. Note we shall start codes at 9000 to avoid a potential clash with the above spine defined code ranges.-->
+      <xs:enumeration value="9000">
+        <xs:annotation>
+          <xs:documentation>Patient Group Directive (PGD) Prescribing</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedPrescriptionLineItemStatusType">
+    <xs:annotation>
+      <xs:documentation>See 'prescription line item status workflow' diagram in appendix 5A of the England API documentation (note applicable to both England and Scotland regions)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PEN">
+        <xs:annotation>
+          <xs:documentation>Pending</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FOW">
+        <xs:annotation>
+          <xs:documentation>Fully Owed </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="POW">
+        <xs:annotation>
+          <xs:documentation>Partially Owed </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NDIS">
+        <xs:annotation>
+          <xs:documentation>Not Dispensed</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DIS">
+        <xs:annotation>
+          <xs:documentation>Dispensed</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CAN">
+        <xs:annotation>
+          <xs:documentation>Cancelled</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EXP">
+        <xs:annotation>
+          <xs:documentation>Expired</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedProfType">
+    <xs:annotation>
+      <xs:documentation>Healthcare professional</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="pharmacist" />
+      <xs:enumeration value="GP" />
+      <xs:enumeration value="nursePrescriber" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedServiceConfigParameterType">
+    <xs:restriction base="xs:string">
+      <!-- England Specific -->
+      <xs:enumeration value="autoNominationsAgent" />
+      <!-- Scotland Specific -->
+      <!-- TBC -->
+      <!-- Types used by both regions -->
+      <!-- TBC -->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedServiceProviderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NHS" />
+      <xs:enumeration value="CRX" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedServiceRegionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="England" />
+      <xs:enumeration value="Scotland" />
+      <xs:enumeration value="Wales" />
+      <xs:enumeration value="Healthi" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedServiceDomainType">
+    <xs:restriction base="xs:string">
+      <!-- England specific -->
+      <xs:enumeration value="IAM">
+        <xs:annotation>
+          <xs:documentation>Identity and Access Management</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EPS">
+        <xs:annotation>
+          <xs:documentation>Electronic Prescription Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ERS">
+        <xs:annotation>
+          <xs:documentation>Electronic Referral System</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PDS">
+        <xs:annotation>
+          <xs:documentation>Patient Demographics Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <!-- Scotland specific -->
+      <xs:enumeration value="MAS">
+        <xs:annotation>
+          <xs:documentation>Minor Ailments Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AMS">
+        <xs:annotation>
+          <xs:documentation>Acute Medication Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CMS">
+        <xs:annotation>
+          <xs:documentation>Chronic Medication Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UCF">
+        <xs:annotation>
+          <xs:documentation>Universal Claim Framework</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <!-- Healthi -->
+      <xs:enumeration value="MHS">
+        <xs:annotation>
+          <xs:documentation>Message Handling Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EHA">
+        <xs:annotation>
+          <xs:documentation>Enterprise Health Account</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PMR">
+        <xs:annotation>
+          <xs:documentation>Patient Medication Record system</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ETC">
+        <xs:annotation>
+          <xs:documentation>Electronic Transmission of Claim Service</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedString3Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="3" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedString5Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="5" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedString6Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="6" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedString10Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="10" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedString16Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="16" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedString20Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="20" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedString35Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="35" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedString50Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="50" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedString100Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="100" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedString200Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="200" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedString255Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="255" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedString400Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="400" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedString2000Type">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="2000" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedUOMCodeType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="18" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedYearType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(19|20)\d{2}" />
+      <!-- YYYY format -->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SharedYearMonthType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(19|20)\d{2}-(0[1-9]|1[012])" />
+      <!-- YYYY-MM format -->
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
